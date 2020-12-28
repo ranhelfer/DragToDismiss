@@ -72,22 +72,17 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     // MARK: UIViewControllerTransitioningDelegate
 
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        
         if let toVC = toVC as? PushedViewController,
            let _  = fromVC as? ViewController {
-            
             /* Going into FMV */
-            print("going in FMV")
             let animatedTransition = FMVTransitionAnimation()
             animatedTransition.imageView = toVC.imageView
             animatedTransition.cell = selectedCell
             return animatedTransition
             
         } else if let fromVC = fromVC as? PushedViewController,
-                    let toVC = toVC as? ViewController {
+                    let _ = toVC as? ViewController {
             /* Going from FMV back to photo collection */
-            print("going back")
-            
             let animatedTransition = FMVTransitionAnimation()
             animatedTransition.imageView = fromVC.imageView
             animatedTransition.cell = selectedCell
@@ -95,7 +90,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             return animatedTransition
         }
         
-        return nil//animatedTransition()
+        return nil
     }
     
     func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
