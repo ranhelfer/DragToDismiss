@@ -65,6 +65,14 @@ class FMVTransitionAnimation: NSObject, UIViewControllerAnimatedTransitioning {
             xLocation = (screenSize.width - image.size.width * aspectRatio)/2
         }
         
+        let transitionContainer = UIView(frame: imageView.frame)
+        transitionContainer.clipsToBounds = true;
+        transitionContainer.addSubview(transitionView)
+        
+        transitionContext.containerView.addSubview(toVC.view)
+        transitionContext.containerView.addSubview(fromVC.view)
+        transitionContext.containerView.addSubview(transitionContainer)
+        
         if !reverse {
             transitionView.frame = cell.frame
             let transitionTargetRect = CGRect(x: xLocation,
@@ -72,64 +80,54 @@ class FMVTransitionAnimation: NSObject, UIViewControllerAnimatedTransitioning {
                                               width: image.size.width*aspectRatio,
                                               height: image.size.height*aspectRatio)
             
-            let transitionContainer = UIView(frame: imageView.frame)
-            transitionContainer.clipsToBounds = true;
-            transitionContainer.addSubview(transitionView)
-            
-            transitionContext.containerView.addSubview(toVC.view)
-            transitionContext.containerView.addSubview(fromVC.view)
-            transitionContext.containerView.addSubview(transitionContainer)
-            
-            UIView.animate(
-                withDuration: transitionDuration(using: transitionContext),
-                animations: {
-                    fromVC.view.alpha = 0
-                    toVC.view.alpha = 1
-                    transitionView.frame = transitionTargetRect
-                    imageView.alpha = 0.0
-                },
-                completion: { _ in
-                    transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-                    fromVC.view.alpha = 1
-                    toVC.view.alpha = 1
-                    cell.alpha = 1
-                    imageView.alpha = 1.0
-                    transitionView.removeFromSuperview()
-                    transitionContainer.removeFromSuperview()
-                })
+            animate(transitionContext: transitionContext,
+                    transitionView: transitionView,
+                    transitionContainer: transitionContainer,
+                    finalFrame: transitionTargetRect)
         } else {
             
             let startingFrame = CGRect(x: xLocation,
                                        y: yLocation,
                                        width: image.size.width*aspectRatio,
                                        height: image.size.height*aspectRatio)
-            
-            let transitionContainer = UIView(frame: imageView.frame)
-            transitionContainer.clipsToBounds = true;
-            transitionContainer.addSubview(transitionView)
             transitionView.frame = startingFrame
-
-            transitionContext.containerView.addSubview(toVC.view)
-            transitionContext.containerView.addSubview(fromVC.view)
-            transitionContext.containerView.addSubview(transitionContainer)
             
-            UIView.animate(
-                withDuration: transitionDuration(using: transitionContext),
-                animations: {
-                    fromVC.view.alpha = 0
-                    toVC.view.alpha = 1
-                    transitionView.frame = cell.frame
-                    imageView.alpha = 0.0
-                },
-                completion: { _ in
-                    transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-                    fromVC.view.alpha = 1
-                    toVC.view.alpha = 1
-                    cell.alpha = 1
-                    imageView.alpha = 1.0
-                    transitionView.removeFromSuperview()
-                    transitionContainer.removeFromSuperview()
-                })
+            animate(transitionContext: transitionContext,
+                    transitionView: transitionView,
+                    transitionContainer: transitionContainer,
+                    finalFrame: cell.frame)
         }
+    }
+    
+    private func animate(transitionContext: UIViewControllerContextTransitioning,
+                         transitionView: UIView,
+                         transitionContainer: UIView,
+                         finalFrame: CGRect) {
+        guard
+            let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
+            let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to),
+            let imageView = imageView,
+            let cell = cell
+            else {
+                return
+        }
+        
+        UIView.animate(
+            withDuration: transitionDuration(using: transitionContext),
+            animations: {
+                fromVC.view.alpha = 0
+                toVC.view.alpha = 1
+                transitionView.frame = finalFrame
+                imageView.alpha = 0.0
+            },
+            completion: { _ in
+                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+                fromVC.view.alpha = 1
+                toVC.view.alpha = 1
+                cell.alpha = 1
+                imageView.alpha = 1.0
+                transitionView.removeFromSuperview()
+                transitionContainer.removeFromSuperview()
+            })
     }
 }
