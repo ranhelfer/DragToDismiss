@@ -51,17 +51,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellIdentifier", for: indexPath)
         cell.backgroundColor = .green
         if let cell = cell as? CellCollectionViewCell {
-            let image = indexPath.row % 2 == 0 ? UIImage(named: "1.jpeg") : UIImage(named: "3.png")
-            cell.imageView.image = image
+            cell.imageView.image = imageForIndexPath(indexPath: indexPath)
         }
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let image = indexPath.row % 2 == 0 ? UIImage(named: "1.jpeg") : UIImage(named: "3.png")
         let viewController = PushedViewController.init(nibName: "PushedViewController", bundle: nil)
-        viewController.image = image
+        viewController.image = imageForIndexPath(indexPath: indexPath)
         viewController.navigationController?.delegate = self
         selectedCell = collectionView.cellForItem(at: indexPath)
         viewController.loadView()
@@ -71,6 +69,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     // MARK: UIViewControllerTransitioningDelegate
 
+    private func imageForIndexPath(indexPath: IndexPath) -> UIImage? {
+        let image = indexPath.row % 2 == 0 ? UIImage(named: "1.jpeg") : UIImage(named: "3.png")
+        return image
+    }
+    
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         if let toVC = toVC as? PushedViewController,
            let _  = fromVC as? ViewController {
