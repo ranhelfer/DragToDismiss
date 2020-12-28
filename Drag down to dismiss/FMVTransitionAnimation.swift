@@ -7,13 +7,25 @@
 
 import UIKit
 
-public enum SFGTransitioningAnimationDirection {
-    case up
-    case right
-    case left
-    case down
+public struct AspectRatioData {
+    let aspectRatio:CGFloat
+    let yLocation:CGFloat
+    let xLocation:CGFloat
+    let width:CGFloat
+    let height:CGFloat
+    
+    init(aspectRatio:CGFloat,
+         yLocation:CGFloat,
+         xLocation:CGFloat,
+         width:CGFloat,
+         height:CGFloat) {
+        self.aspectRatio = aspectRatio
+        self.yLocation = yLocation
+        self.xLocation = xLocation
+        self.width = width
+        self.height = height
+    }
 }
-
 
 class FMVTransitionAnimation: NSObject, UIViewControllerAnimatedTransitioning {
 
@@ -28,6 +40,34 @@ class FMVTransitionAnimation: NSObject, UIViewControllerAnimatedTransitioning {
 
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return AnimatedTransitionConstants.transitionTime
+    }
+    
+    public class func getAspectRatio(viewController: UIViewController, image: UIImage) ->  AspectRatioData {
+        let screenSize = UIScreen.main.bounds
+        let window = UIApplication.shared.windows[0]
+        let left = window.safeAreaInsets.left
+        let right = window.safeAreaInsets.right
+        let top = window.safeAreaInsets.top
+        let bottom = window.safeAreaInsets.bottom
+        let navigationBarHeight = viewController.navigationController?.navigationBar.bounds.height ?? 0
+        //let statusBarHeight = viewController.view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+        let verticalPlaceHoldersAddedHeight = navigationBarHeight + top + bottom //+ statusBarHeight
+        
+        var aspectRatio = (screenSize.width - left - right)/image.size.width
+        
+        var yLocation = (screenSize.height - verticalPlaceHoldersAddedHeight - image.size.height*aspectRatio)/2
+        var xLocation = CGFloat(0)
+        if image.size.height > image.size.width {
+            aspectRatio = (screenSize.height - navigationBarHeight - bottom - top)/image.size.height
+            yLocation = 0
+            xLocation = (screenSize.width - image.size.width * aspectRatio)/2
+        }
+        
+        return AspectRatioData(aspectRatio: aspectRatio,
+                                  yLocation: yLocation,
+                                  xLocation: xLocation,
+                                  width: image.size.width*aspectRatio,
+                                  height: image.size.height*aspectRatio)
     }
     
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -45,26 +85,6 @@ class FMVTransitionAnimation: NSObject, UIViewControllerAnimatedTransitioning {
         transitionView.contentMode = .scaleAspectFill
         transitionView.clipsToBounds = true;
         
-        let screenSize = UIScreen.main.bounds
-        let window = UIApplication.shared.windows[0]
-        let left = window.safeAreaInsets.left
-        let right = window.safeAreaInsets.right
-        let top = window.safeAreaInsets.top
-        let bottom = window.safeAreaInsets.bottom
-        let navigationBarHeight = toVC.navigationController?.navigationBar.bounds.height ?? 0
-        let statusBarHeight = toVC.view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
-        let verticalPlaceHoldersAddedHeight = navigationBarHeight + top + bottom + statusBarHeight
-        
-        var aspectRatio = (screenSize.width - left - right)/image.size.width
-        
-        var yLocation = (screenSize.height - verticalPlaceHoldersAddedHeight - image.size.height*aspectRatio)/2
-        var xLocation = CGFloat(0)
-        if image.size.height > image.size.width {
-            aspectRatio = (screenSize.height - navigationBarHeight - bottom - top)/image.size.height
-            yLocation = 0
-            xLocation = (screenSize.width - image.size.width * aspectRatio)/2
-        }
-        
         let transitionContainer = UIView(frame: imageView.frame)
         transitionContainer.clipsToBounds = true;
         transitionContainer.addSubview(transitionView)
@@ -73,23 +93,24 @@ class FMVTransitionAnimation: NSObject, UIViewControllerAnimatedTransitioning {
         transitionContext.containerView.addSubview(fromVC.view)
         transitionContext.containerView.addSubview(transitionContainer)
         
+        let aspectRatioData = Self.getAspectRatio(viewController: toVC, image: image)
+
         if !reverse {
             transitionView.frame = cell.frame
-            let transitionTargetRect = CGRect(x: xLocation,
-                                              y: yLocation,
-                                              width: image.size.width*aspectRatio,
-                                              height: image.size.height*aspectRatio)
+            let transitionTargetRect = CGRect(x: aspectRatioData.xLocation,
+                                              y: aspectRatioData.yLocation,
+                                              width: aspectRatioData.width,
+                                              height: aspectRatioData.height)
             
             animate(transitionContext: transitionContext,
                     transitionView: transitionView,
                     transitionContainer: transitionContainer,
                     finalFrame: transitionTargetRect)
         } else {
-            
-            let startingFrame = CGRect(x: xLocation,
-                                       y: yLocation,
-                                       width: image.size.width*aspectRatio,
-                                       height: image.size.height*aspectRatio)
+            let startingFrame = CGRect(x: aspectRatioData.xLocation,
+                                       y: aspectRatioData.yLocation,
+                                       width: aspectRatioData.width,
+                                       height: aspectRatioData.height)
             transitionView.frame = startingFrame
             
             animate(transitionContext: transitionContext,

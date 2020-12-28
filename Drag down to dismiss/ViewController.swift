@@ -70,7 +70,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     // MARK: UIViewControllerTransitioningDelegate
 
     private func imageForIndexPath(indexPath: IndexPath) -> UIImage? {
-        let image = indexPath.row % 2 == 0 ? UIImage(named: "1.jpeg") : UIImage(named: "3.png")
+        let image = indexPath.row % 2 == 0 ? UIImage(named: "4.png") : UIImage(named: "3.png")
         return image
     }
     
