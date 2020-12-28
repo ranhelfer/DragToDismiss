@@ -11,7 +11,8 @@ class PushedViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
     var image: UIImage?
-    
+    weak var linkedInteractor: FMVTranistionInteractor?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         if let image = image {
@@ -19,11 +20,15 @@ class PushedViewController: UIViewController {
         }
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        linkedInteractor?.setUp(viewController: self)
+
+    }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-       // navigationController?.setNavigationBarHidden(false, animated: true)
-
     }
     
     /*

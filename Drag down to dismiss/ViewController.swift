@@ -14,6 +14,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     private var selectedCell: UICollectionViewCell?
     private var selectedImageSize: CGSize?
     private var selectedImage: UIImage?
+    private var interactor = FMVTranistionInteractor()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +65,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         selectedCell = collectionView.cellForItem(at: indexPath)
         viewController.loadView()
         viewController.viewDidLoad()
+        viewController.linkedInteractor = interactor
         navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -97,6 +99,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return nil// interactiveTransition()
+        return interactor.hasStarted ? interactor : nil
     }
 }

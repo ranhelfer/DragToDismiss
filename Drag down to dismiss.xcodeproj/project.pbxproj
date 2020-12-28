@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		68855D082598E9DA004B295A /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 68855D072598E9DA004B295A /* 3.png */; };
+		68A0F4432599C6B600184C6C /* FMVTranistionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A0F4422599C6B600184C6C /* FMVTranistionInteractor.swift */; };
 		68BB3A1F259241370017D37F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BB3A1E259241370017D37F /* AppDelegate.swift */; };
 		68BB3A21259241370017D37F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BB3A20259241370017D37F /* SceneDelegate.swift */; };
 		68BB3A23259241370017D37F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BB3A22259241370017D37F /* ViewController.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		68855D072598E9DA004B295A /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 3.png; path = ../../3.png; sourceTree = "<group>"; };
+		68A0F4422599C6B600184C6C /* FMVTranistionInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMVTranistionInteractor.swift; sourceTree = "<group>"; };
 		68BB3A1B259241370017D37F /* Drag down to dismiss.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Drag down to dismiss.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		68BB3A1E259241370017D37F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68BB3A20259241370017D37F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				68BB3A20259241370017D37F /* SceneDelegate.swift */,
 				68BB3A22259241370017D37F /* ViewController.swift */,
 				68E418ED2597A8990049E2CF /* FMVTransitionAnimation.swift */,
+				68A0F4422599C6B600184C6C /* FMVTranistionInteractor.swift */,
 				68BB3A24259241370017D37F /* Main.storyboard */,
 				68BB3A3D2592645D0017D37F /* CellCollectionViewCell.swift */,
 				68BB3A3E2592645D0017D37F /* CellCollectionViewCell.xib */,
@@ -174,6 +177,7 @@
 				68BB3A3A2592641F0017D37F /* PushedViewController.swift in Sources */,
 				68BB3A1F259241370017D37F /* AppDelegate.swift in Sources */,
 				68BB3A21259241370017D37F /* SceneDelegate.swift in Sources */,
+				68A0F4432599C6B600184C6C /* FMVTranistionInteractor.swift in Sources */,
 				68BB3A3F2592645D0017D37F /* CellCollectionViewCell.swift in Sources */,
 				68E418EE2597A8990049E2CF /* FMVTransitionAnimation.swift in Sources */,
 			);
