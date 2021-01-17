@@ -30,7 +30,7 @@ public struct AspectRatioData {
 class FMVTransitionAnimation: NSObject, UIViewControllerAnimatedTransitioning {
 
     private struct AnimatedTransitionConstants {
-        static let transitionTime = TimeInterval(1.2)
+        static let transitionTime = TimeInterval(1.0)
         static let startingAlpha = CGFloat(0.6)
     }
     

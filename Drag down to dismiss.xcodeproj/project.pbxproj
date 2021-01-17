@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		68855D082598E9DA004B295A /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 68855D072598E9DA004B295A /* 3.png */; };
+		6882E37225B4632F0044E393 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 6882E37125B4632F0044E393 /* 3.png */; };
 		68A0F4432599C6B600184C6C /* FMVTranistionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A0F4422599C6B600184C6C /* FMVTranistionInteractor.swift */; };
 		68BB3A1F259241370017D37F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BB3A1E259241370017D37F /* AppDelegate.swift */; };
 		68BB3A21259241370017D37F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BB3A20259241370017D37F /* SceneDelegate.swift */; };
@@ -26,7 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		68855D072598E9DA004B295A /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 3.png; path = ../../3.png; sourceTree = "<group>"; };
+		6882E37125B4632F0044E393 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
 		68A0F4422599C6B600184C6C /* FMVTranistionInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMVTranistionInteractor.swift; sourceTree = "<group>"; };
 		68BB3A1B259241370017D37F /* Drag down to dismiss.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Drag down to dismiss.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		68BB3A1E259241370017D37F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -88,7 +88,7 @@
 				68BB3A392592641F0017D37F /* PushedViewController.xib */,
 				68BB3A33259241610017D37F /* 1.jpeg */,
 				68BB3A4325926C9C0017D37F /* 2.jpeg */,
-				68855D072598E9DA004B295A /* 3.png */,
+				6882E37125B4632F0044E393 /* 3.png */,
 				68C0E1FE2599C24B007C2980 /* 4.png */,
 				68BB3A27259241390017D37F /* Assets.xcassets */,
 				68BB3A29259241390017D37F /* LaunchScreen.storyboard */,
@@ -157,8 +157,8 @@
 				68BB3A2B259241390017D37F /* LaunchScreen.storyboard in Resources */,
 				68BB3A34259241610017D37F /* 1.jpeg in Resources */,
 				68C0E1FF2599C24B007C2980 /* 4.png in Resources */,
+				6882E37225B4632F0044E393 /* 3.png in Resources */,
 				68BB3A28259241390017D37F /* Assets.xcassets in Resources */,
-				68855D082598E9DA004B295A /* 3.png in Resources */,
 				68BB3A3B2592641F0017D37F /* PushedViewController.xib in Resources */,
 				68BB3A402592645D0017D37F /* CellCollectionViewCell.xib in Resources */,
 				68BB3A26259241370017D37F /* Main.storyboard in Resources */,
