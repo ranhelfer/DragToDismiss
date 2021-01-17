@@ -96,7 +96,7 @@ class FMVTransitionAnimation: NSObject, UIViewControllerAnimatedTransitioning {
         let aspectRatioData = Self.getAspectRatio(viewController: toVC, image: image)
 
         if !reverse {
-            transitionView.frame = cell.frame
+            transitionView.frame =  transitionContainer.convert(cell.bounds, from: cell)
             let transitionTargetRect = CGRect(x: aspectRatioData.xLocation,
                                               y: aspectRatioData.yLocation,
                                               width: aspectRatioData.width,
@@ -116,7 +116,7 @@ class FMVTransitionAnimation: NSObject, UIViewControllerAnimatedTransitioning {
             animate(transitionContext: transitionContext,
                     transitionView: transitionView,
                     transitionContainer: transitionContainer,
-                    finalFrame: cell.frame)
+                    finalFrame: transitionContainer.convert(cell.bounds, from: cell))
         }
     }
     
